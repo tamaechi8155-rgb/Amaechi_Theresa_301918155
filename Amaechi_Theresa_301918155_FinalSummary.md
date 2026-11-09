@@ -25,11 +25,12 @@ For the index performance test, I created 20,000 separate performance records an
 These results show that the index improved the lookup speed in my test, although the timings are specific to the query and environment I used.
 
 ## Portfolio 3: Transactions and Concurrency
-I used a temporary counter on trip to test COMMIT, ROLLBACK and READ COMMITTED isolation. The uncommitted update remained hidden from the other session, and ROLLBACK restored the earlier committed value. Without locking, two increments left the counter at 2. With SELECT FOR UPDATE, Session B waited for Session A and the final value was 3. The helper is confined to this exercise; the case's original business fields stay unchanged.
+I utilised a temporary counter on trip to test COMMIT, ROLLBACK and READ COMMITTED isolation. The uncommitted update remained hidden from the other session, and ROLLBACK restored the earlier committed value. Without locking, two increments left the counter at 2. With SELECT FOR UPDATE, Session B waited for Session A and the final value was 3. The helper is confined to this exercise; the case's original business fields stay unchanged.
 
 ## Portfolio 4: NoSQL and Advanced Data Models
 
-I used trip_events for the case's event documents. MongoDB inserted 2 sample events and returned the expected results for 4 queries. Validation rejected an invalid date type and a duplicate event ID. Embedded snapshots keep related details with an event, while the details field can differ by event type. These are fictional events; PostgreSQL continues to enforce its relational rules.
+I used a MongoDB collection called `trip_events` to store the event records for my case study. I added two sample events and tested them with four queries, which returned the expected results. I also tested the validation rules, and the system rejected an invalid date format and a duplicate event ID.
+I used embedded snapshots to keep related information together within each event. The `details` field can also hold different information depending on the type of event being recorded. The events used for this test are fictional, while PostgreSQL remains responsible for enforcing the main relational database rules.
 
 ## Repository and evidence
 
@@ -41,13 +42,12 @@ The portfolio folders contain the SQL and JavaScript, explanations, query plans,
 <!-- PAGE BREAK -->
 
 ## Portfolio 5: Distributed and Cloud Database Exercise
-
-I proposed three MongoDB replica members across separate failure zones. The discussion covers primary elections, majority acknowledgement, secondary lag and sharding trade-offs for trip_events. Replication supports availability, while backups address recovery. PostgreSQL needs its own availability plan. This is the permitted discussion option; no live replica set or failover test was deployed.
+I proposed using three MongoDB replica members in separate failure zones to improve availability. I explained how primary elections, majority acknowledgement, secondary lag and sharding would work for `trip_events`. Replication helps keep the system available, while backups support data recovery. PostgreSQL also needs a separate availability plan. This was only a proposed design; I did not deploy or test a live replica set or failover.
 
 ## Individual reflection
 
-I kept rider, driver, trip, payment in separate tables so their details could be maintained without repeating them in every related record. A partial unique rule on driver_id applies only when status is assigned or in_progress, so each driver has at most one active trip. The constraint tests check this alongside the required values and record links. One issue illustrated by the two-session exercise is that both sessions can read the same value before either update is committed. Locking the row before reading preserves both increments. The index comparison also shows why I need to check the execution plan as well as the final answer: the same result can require different amounts of database work.
-
+I placed the rider, driver, trip and payment in separate tables to avoid repeating information. I added a rule to ensure that a driver can only have one active trip at a time. I also tested the constraints to confirm that the required values and table relationships were maintained.
+The two-session test showed that both sessions could read the same value before updating it. Locking the row before reading helps prevent this issue and ensures both updates are saved. The index test also showed me why checking the execution plan is important, because two queries can return the same result but require different amounts of database work
 ## AI-use declaration
 
 I used GitHub Copilot and the portfolio generator to help prepare the database model, scripts and explanations. The generator ran the PostgreSQL and MongoDB exercises, checked their outputs and captured the result images.  I remain responsible for checking and explaining the submitted work.
