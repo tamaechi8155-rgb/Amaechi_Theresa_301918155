@@ -1,8 +1,13 @@
-# Theresa Amaechi — MIT 8103
+# Ride-hailing / Logistics System
 
-Student ID: 301918155
+Theresa Amaechi · Student ID 301918155
 
-Ride-hailing / Logistics
-System
+The portfolio uses fictional records for Ride-hailing / Logistics System.
 
-The portfolio is being generated. Completed stages will appear in the commit history.
+- [Portfolio 1](portfolio-1-database-design/)
+- [Portfolio 2](portfolio-2-query-optimisation/)
+- [Portfolio 3](portfolio-3-transactions-concurrency/)
+- [Portfolio 4](portfolio-4-nosql/)
+- [Portfolio 5](portfolio-5-distributed-cloud/)
+
+[Final summary](Amaechi_Theresa_301918155_FinalSummary.md) · [PDF](Amaechi_Theresa_301918155_FinalSummary.pdf)
